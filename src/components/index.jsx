@@ -11,6 +11,7 @@ class Input extends PureComponent {
       inputClass,
       placeholder,
       type,
+      style,
       ...props
     } = this.props;
     return (
@@ -26,6 +27,7 @@ class Input extends PureComponent {
             !!error && 'error'
           )}
           type={type}
+          style={style}
           name={name}
           id={`id-${name}`}
           onFocus={this.handleFocus}

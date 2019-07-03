@@ -11,11 +11,44 @@ export default function getDefaultValues(initialState, requiredFields) {
 
         handleInput = event => {
             const { value, name } = event.currentTarget;
+            let errorsEmail = false;
+            let errorsPhone = false;
+            let errorsName = false;
+            
+            switch (name) {
+                case 'email':
+                    if (!(value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i))) {
+                        errorsEmail = true;
+                    } else {
+                        errorsEmail = false;
+                    }  
+                    break;
+                case 'phone':
+                    if (value.length > 9) {
+                        errorsPhone = false;
+                    } else {
+                        errorsPhone = true;
+                    }  
+                    break;
+                case 'username':
+                    if (value.length > 2) {
+                        errorsName = false;
+                    } else {
+                        errorsName = true;
+                    }  
+                    break;
+                default:
+                    break;
+            }
+            // console.log(errorsEmail)
             this.setState(({ data, errors }) => ({
                 data: {
                 ...data,
-                [name]: value,
+                [name]: value.trim(),
                 },
+                errorsEmail,
+                errorsPhone,
+                errorsName,
                 errors: {
                 ...errors,
                 [name]: '',
